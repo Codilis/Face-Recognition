@@ -1,7 +1,7 @@
 # Image-Recognition
 Recognise face of a person using a video camera 
 
-Used Python, OpenCV for recognisation
+Used Python, OpenCV for recognisation and
 MySQL for database management
 
 Software Requirements:
