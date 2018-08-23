@@ -8,3 +8,4 @@ Software Requirements:
 2. install opencv-contrib-python using pip
 3. MySQL to Python connector that can be downloaded from https://dev.mysql.com/downloads/connector/python/
 
+Add Your MySQL username and password in the files detector.py and create_dataset.py before running them.
