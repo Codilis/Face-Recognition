@@ -2,18 +2,23 @@ import mysql.connector
 from mysql.connector import errorcode
 
 class Connection:
-    def __init__(self):
+    def __init__(self, user, password):
         self.config = {
-          'user': 'root',
-          'password': '123456',
+          'user': user,
+          'password': password,
           'host': '127.0.0.1',
-          'database': 'Images',
-          'raise_on_warnings': True,
+          'raise_on_warnings': False,
         }
 
     def connect(self):
-        self.cnx = mysql.connector.connect(**self.config)
+        self.cnx = mysql.connector.connect(**self.config)        
         self.c = self.cnx.cursor()
+        try:
+            self.c.execute("CREATE DATABASE images")
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_DB_CREATE_EXISTS:
+                pass
+        self.c.execute("USE images")
 
     def create_table(self):
         try:
@@ -28,6 +33,7 @@ class Connection:
         idd = self.c.lastrowid
         data = {'id':idd, 'name':value}
         sql = ("INSERT INTO names (id, name) VALUES (%(id)s, %(name)s)")
+        x = 0
         try:
             self.c.execute(sql, data)
         except mysql.connector.Error as err:
