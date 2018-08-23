@@ -3,7 +3,8 @@ import os
 from database import Connection
 
 ##===================Connection Establishment=====================================================================
-conn = Connection()
+username, password = 'username', 'password'
+conn = Connection(username, password)
 conn.connect()
 conn.create_table()
 
@@ -15,7 +16,7 @@ conn.close_connection()
 ##=====================Camera Starts for dataset creation==========================================================
 
 cam = cv2.VideoCapture(0)
-detector=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+detector=cv2.CascadeClassifier('cascade/haarcascade_frontalface_default.xml')
 i=0
 offset=50
 os.makedirs('dataset', exist_ok=True)
